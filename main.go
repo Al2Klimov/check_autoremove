@@ -12,6 +12,7 @@ import (
 	"os"
 	"os/exec"
 	"strings"
+	"syscall"
 )
 
 func main() {
@@ -27,6 +28,8 @@ func onTerminal() (output string) {
 }
 
 func checkAutoremove() (output string, perfdata PerfdataCollection, errs map[string]error) {
+	syscall.RawSyscall(syscall.SYS_SETUID, uintptr(os.Geteuid()), 0, 0)
+
 	cli := flag.NewFlagSet(os.Args[0], flag.ContinueOnError)
 
 	var warn, crit OptionalThreshold
