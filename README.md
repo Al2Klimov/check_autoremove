@@ -52,9 +52,14 @@ like any other check plugin. (Consult that tool's manual on how to do that.)
 It should work with any monitoring tool
 supporting the [Nagio$ check plugin API].
 
-The only limitation: check\_autoremove must be run on the host
-to be checked – either with an agent of your monitoring tool or by SSH.
-Otherwise it will check the host your monitoring tool runs on.
+Limitations:
+
+* check\_autoremove must be run on the host to be checked –
+  either with an agent of your monitoring tool or by SSH.
+  Otherwise it will check the host your monitoring tool runs on.
+* **The check\_autoremove binary must be owned by root
+  and the setuid bit must be set**, i.e.:
+  `chown root .../check_autoremove; chmod u+s .../check_autoremove`
 
 #### Icinga 2
 
